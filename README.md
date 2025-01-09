@@ -1,50 +1,57 @@
-# React + TypeScript + Vite
+# food delivery system that includes user authentication, menu management, and order tracking.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** repository for the **food delivery system**. The application allows users to search, browse, and manage menus efficiently. This project is built using modern web technologies to provide a smooth and responsive user experience.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dynamic Menu Management**: Fetch, display, and manage menu items dynamically using APIs.
+- **Search Functionality**: Perform efficient, debounced searches across menu items.
+- **Pagination**: Seamless scrolling and pagination for large datasets.
+- **Protected Routes**: Secure pages with user authentication.
+- **Error Handling**: Comprehensive error boundary implementation for better UX.
+- **Responsive Design**: Fully optimized for desktop and mobile devices.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🛠️ Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+- **React.js**: Core framework for building UI components.
+- **TypeScript**: Type-safe development for enhanced maintainability.
+- **Redux Toolkit**: State management for global application state.
+- **React Router DOM**: For routing and navigation.
+- **Axios**: For handling API requests.
+- **Vite**: Lightning-fast development environment.
+- **Tailwind CSS**: For styling and responsive design.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🔧 Setup & Installation
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Follow these steps to set up the project locally:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/CodeSciRahul/full-stack-task-management-app.git
+2. ```bash
+   npm install
+3. **Create env variable**:
+   **VITE_PUBLIC_BASE_URL**:
+   ```bash
+   https://full-stack-task-management-app-backend-lww7.onrender.com/api
+4.**Run code**
+```bash
+npm run dev
+
+## 📂 Project Structure graphql Copy code
+src/
+├── assets/         # Static assets like images
+├── components/     # Reusable components (e.g., MenuCard, Navbar)
+├── pages/          # Page components (e.g., Dashboard, Menu)
+├── services/       # API service handlers
+├── store/          # Redux Toolkit slices and store setup
+├── styles/         # Tailwind CSS custom styles
+├── utils/          # Utility functions and helpers
+└── App.tsx         # Main application entry point
+
+
+
