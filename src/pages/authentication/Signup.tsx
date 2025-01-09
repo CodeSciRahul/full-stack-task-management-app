@@ -88,9 +88,15 @@ export function SignupForm({
                 <Input
                   id="username"
                   type="text"
+                  autoComplete="true"
                   placeholder="Enter your username"
-                  {...register("username", { required: "Username is required" })}
-                />
+                  {...register("username", {
+                    required: "Username is required",
+                    minLength: {
+                      value: 4,
+                      message: "Username must be at least 4 characters",
+                    },
+                  })}                  />
                 {errors.username && (
                   <p className="text-sm text-red-600">{errors.username.message}</p>
                 )}
@@ -100,9 +106,15 @@ export function SignupForm({
                 <Input
                   id="password"
                   type="password"
+                  autoComplete="true"
                   placeholder="Enter your password"
-                  {...register("password", { required: "Password is required" })}
-                />
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}                  />
                 {errors.password && (
                   <p className="text-xs text-red-600">{errors.password.message}</p>
                 )}

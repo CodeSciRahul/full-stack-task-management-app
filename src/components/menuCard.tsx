@@ -57,9 +57,9 @@ export const MenuCard: React.FC<MenuItemProps> = ({
               <p>Availability: {item.availability ? "Yes" : "No"}</p>
               
               <div className="flex flex-col gap-2">
-                <p className="flex gap-2">
+                <span className="flex gap-2">
                   Quantity: <p className="text-green-500">{(cart?.find((i) => i?.id === item._id))?.quantity ?? 0}</p>
-                </p>
+                </span>
                 <div className="flex gap-2 flex-wrap">
                   <Button
                   variant="default"
