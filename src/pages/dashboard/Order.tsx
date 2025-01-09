@@ -50,13 +50,14 @@ export const Order = () => {
   const cart = useAppSelecter((state) => state.cart);
   const dispatch = useAppDispatch();
   const [pastOrders, setPastOrders] = useState<OrderData[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [cartloading, setcartLoading] = useState<boolean>(false);
+  const [historyloading, sethistoryLoading] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const placeOrder = async () => {
     try {
-      setLoading(true);
+      setcartLoading(true);
 
       const orderData: createOrderReq = {
         items: cart.items.map((item) => ({
@@ -73,13 +74,13 @@ export const Order = () => {
       console.error("Failed to place order:", error);
       alert("Failed to place order. Please try again.");
     } finally {
-      setLoading(false);
+      setcartLoading(false);
     }
   };
 
   const fetchOrderHistory = async (page: number) => {
     try {
-      setLoading(true);
+      sethistoryLoading(true);
 
       const response = await orderHistory(page, 2);
       const { data, meta } = response.data as OrderHistoryResponse;
@@ -89,7 +90,7 @@ export const Order = () => {
     } catch (error) {
       console.error("Failed to fetch order history:", error);
     } finally {
-      setLoading(false);
+      sethistoryLoading(false);
     }
   };
 
@@ -106,13 +107,13 @@ export const Order = () => {
     <div className="p-6">
       {/* Cart Section */}
       <Cart
-      isloading = {loading}
+      isloading = {cartloading}
       placeOrder={placeOrder} 
       />
 
       {/* Order History Section */}
       <OrderHistory
-      loading
+      loading={historyloading}
       pastOrders={pastOrders} 
       />
 

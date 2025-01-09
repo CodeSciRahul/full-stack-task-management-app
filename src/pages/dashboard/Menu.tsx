@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useAppDispatch} from "@/Redux/Hooks/store";
+import { useAppDispatch } from "@/Redux/Hooks/store";
 import { Button } from "@/components/ui/button";
 import { menu } from "@/service/apiService";
 import { CreateMenu } from "@/Modals/createMenu";
-import { addToCart,removeFromCart} from "@/Redux/feature/cartSlice";
+import { addToCart, removeFromCart } from "@/Redux/feature/cartSlice";
 import { MenuCard } from "@/components/menuCard";
 
 interface MenuItem {
@@ -80,31 +80,28 @@ export const Menu: React.FC = () => {
 
   return (
     <>
-<div className="p-6">
-  <div className="flex justify-between items-center mb-4">
-    <h1 className="text-2xl font-bold">Menu Items</h1>
-    <Button variant="outline" onClick={() => setisOpen(!isOpen)}>
-      Create Menu
-    </Button>
-  </div>
+      <div className="p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl font-bold">Menu Items</h1>
+          <Button variant="outline" onClick={() => setisOpen(!isOpen)}>
+            Create Menu
+          </Button>
+        </div>
 
-  {/* Responsive Grid Layout */}
-  <MenuCard
-  handleAddToCart={handleAddToCart}
-  handleRemoveFromCart={handleRemoveFromCart}
-  hasMore
-  lastItemRef={lastItemRef}
-  menuItems={menuItems} 
-  />
+        {/* Responsive Grid Layout */}
+        <MenuCard
+          handleAddToCart={handleAddToCart}
+          handleRemoveFromCart={handleRemoveFromCart}
+          hasMore
+          lastItemRef={lastItemRef}
+          menuItems={menuItems}
+        />
 
-
-
-  {loading && <p className="text-center mt-4">Loading...</p>}
-  {!hasMore && !loading && (
-    <p className="text-center mt-4">No more items</p>
-  )}
-</div>
-
+        {loading && <p className="text-center mt-4">Loading...</p>}
+        {!hasMore && !loading && (
+          <p className="text-center mt-4">No more items</p>
+        )}
+      </div>
 
       {/* Create Menu Modal */}
       {isOpen && <CreateMenu isOpen setisOpen={setisOpen} />}

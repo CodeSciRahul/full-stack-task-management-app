@@ -1,5 +1,9 @@
 import { Button } from "./ui/button";
 import { useAppSelecter } from "@/Redux/Hooks/store";
+import { Pencil } from "lucide-react";
+import { UpdateMenu } from "@/Modals/updateMenu";
+import DeleteMenuCard from "@/Modals/alert";
+import { useState } from "react";
 interface MenuItem {
     _id: string;
     name: string;
@@ -24,7 +28,13 @@ export const MenuCard: React.FC<MenuItemProps> = ({
     handleRemoveFromCart
 
 }) => {
+  const [isOpen, setisOpen] = useState<boolean>(false)
+  const [updateItem, setupdateItem] = useState<MenuItem | null>(null)
       const cart = useAppSelecter((state)=> state.cart.items)
+      const handleUpdate = (item: MenuItem) => {
+        setupdateItem(item)
+        setisOpen(!isOpen)
+      }
     return (
         <>
          {/* Responsive Grid Layout */}
@@ -35,17 +45,24 @@ export const MenuCard: React.FC<MenuItemProps> = ({
               className="p-4 border rounded shadow-md flex flex-col gap-4 w-full overflow-hidden"
               ref={index === menuItems.length - 1 && hasMore ? lastItemRef : null}
             >
+              <div className="flex justify-between">
               <h2 className="text-lg font-bold truncate">{item.name}</h2>
+              <div className="flex">
+                <Button variant="ghost" className="w-12" onClick={() => handleUpdate(item)}><Pencil /></Button>
+                <DeleteMenuCard id={item?._id}/>
+              </div>
+              </div>
               <p>Category: {item.category}</p>
               <p>Price: ${item.price}</p>
               <p>Availability: {item.availability ? "Yes" : "No"}</p>
               
               <div className="flex flex-col gap-2">
-                <p>
-                  Quantity: {(cart?.find((i) => i?.id === item._id))?.quantity ?? 0}
+                <p className="flex gap-2">
+                  Quantity: <p className="text-green-500">{(cart?.find((i) => i?.id === item._id))?.quantity ?? 0}</p>
                 </p>
                 <div className="flex gap-2 flex-wrap">
                   <Button
+                  variant="default"
                     className="whitespace-nowrap"
                     onClick={() => handleAddToCart(item)}
                   >
@@ -53,6 +70,7 @@ export const MenuCard: React.FC<MenuItemProps> = ({
                   </Button>
                   {(cart?.find((i) => i?.id === item._id)?.quantity ?? 0) > 0 && (
                     <Button
+                    variant="outline"
                       className="whitespace-nowrap"
                       onClick={() => handleRemoveFromCart(item._id)}
                     >
@@ -64,6 +82,9 @@ export const MenuCard: React.FC<MenuItemProps> = ({
             </div>
           ))}
         </div>
+
+        {/* updateMenu modal */}
+        {isOpen && <UpdateMenu isOpen setisOpen={setisOpen}menuItem={updateItem} />}
         </>
     )
 }
