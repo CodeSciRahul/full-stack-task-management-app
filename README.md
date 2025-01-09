@@ -39,9 +39,8 @@ Follow these steps to set up the project locally:
    ```bash
    https://full-stack-task-management-app-backend-lww7.onrender.com/api
 4.**Run code**
-```bash
-npm run dev
-
+   npm run dev
+   
 ## 📂 Project Structure graphql Copy code
 src/
 ├── assets/         # Static assets like images
