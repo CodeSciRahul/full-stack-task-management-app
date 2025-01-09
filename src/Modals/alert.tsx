@@ -1,3 +1,5 @@
+//Alert Message Modal when user delete Menu card.
+
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
