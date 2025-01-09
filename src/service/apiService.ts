@@ -1,13 +1,71 @@
 import http from "./httpService";
 
 interface loginSignupReq {
-    username: string,
-    password: string
-}
-export function userLogin(data:loginSignupReq){
-    return http.post(`/login`, data)
+  username: string;
+  password: string;
 }
 
-export function userSignup(data:loginSignupReq){
-    return http.post(`/register`,data);
+export interface MenuResponse {
+  data: [
+    {
+      _id: string;
+      name: string;
+      category: string;
+      price: number;
+      availability: boolean;
+    }
+  ];
+  meta: {
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+    itemsPerPage: number;
+    previousPage: number | null;
+    nextPage: number | null;
+  };
+}
+interface MenuReq {
+  name: string,
+  category: string;
+  price: number;
+  availability: boolean;
+}
+
+interface createOrderReq {
+  items: {
+    menuItemId: string;
+    quantity: number;
+  }[]; // Changed from tuple to array
+}
+
+export function userLogin(data: loginSignupReq) {
+  return http.post(`/login`, data);
+}
+
+export function userSignup(data: loginSignupReq) {
+  return http.post(`/register`, data);
+}
+
+export function menu(page: number, limit: number) {
+  return http.get(`/menu?page=${page}&limit=${limit}`);
+}
+
+export function createMenu(data: MenuReq) {
+  return http.post("/menu", data);
+}
+
+export function updateMenu(data: MenuReq, id:string){
+return http.put(`/menu/${id}`, data)
+}
+
+export function deleteMenu(id: string){
+    return http.delete(`/menu/${id}`)
+}
+
+export function createOrder(data: createOrderReq){
+  return http.post(`/order`,data);
+}
+
+export function orderHistory(page: number, limit: number){
+  return http.get(`/orders?page=${page}}&limit=${limit}`);
 }

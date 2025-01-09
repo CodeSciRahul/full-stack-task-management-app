@@ -6,15 +6,16 @@ import { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // Create custom Axios instance
 const custom_axios = axios.create({
-    baseURL: properties?.PRIVATE_BASE_URL,
+    baseURL: properties?.PUBLIC_BASE_URL,
 });
 
 // Add request interceptor to include Authorization header
 custom_axios.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("token"); // Retrieve token from localStorage
+        const tokenString = localStorage.getItem("token");
+        const token = tokenString ? JSON.parse(tokenString) : null;
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`; // Set Authorization header
+            config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
     },
@@ -25,12 +26,12 @@ custom_axios.interceptors.request.use(
 
 // Add response interceptor to handle errors globally
 custom_axios.interceptors.response.use(
-    (response) => response, // Forward successful responses
+    (response) => response,
     (error) => {
         if (error.response?.status) {
             if (error.response.status === 401) {
                 store.dispatch(removeUserInfo())
-                window.location.href = "/login"; // Redirect to login page
+                window.location.href = "/login";
             }
         }
         return Promise.reject(error);
