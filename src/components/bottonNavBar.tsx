@@ -2,15 +2,18 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/Redux/Hooks/store";
+import { removeUserInfo } from "@/Redux/feature/authSlice";
 
 export const BottomNavbar = ({ className }: { className: string }) => {
   const [activeState, setActiveState] = useState<string>("");
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   // Array of menu options
   const menuOptions = [
-    { id: "", label: "Menu"},
-    { id: "order", label: "Order"},
+    { id: "", label: "Menu" },
+    { id: "order", label: "Order" },
   ];
 
   return (
@@ -20,17 +23,21 @@ export const BottomNavbar = ({ className }: { className: string }) => {
           <div className="py-3">
             <div className="flex space-y-1">
               {menuOptions.map((item) => (
-                <div key={item.id} className="relative w-full" onClick={() =>navigate(`/${item?.id}`)}>
+                <div
+                  key={item.id}
+                  className="relative w-full"
+                  onClick={() => navigate(`/${item?.id}`)}
+                >
                   <Button
                     variant="ghost"
                     className="w-full justify-start flex gap-2"
-                    onClick={() =>
-                      setActiveState(item.id)
-                    }
+                    onClick={() => setActiveState(item.id)}
                   >
                     <span
                       className={` ${
-                        activeState === item.id ? "text-[#001F3F]" : "text-gray-600"
+                        activeState === item.id
+                          ? "text-[#001F3F]"
+                          : "text-gray-600"
                       }`}
                     >
                       {item.label}
@@ -42,6 +49,21 @@ export const BottomNavbar = ({ className }: { className: string }) => {
                   )}
                 </div>
               ))}
+
+              <div
+                className="relative w-full text-gray-600"
+                onClick={() => {
+                  dispatch(removeUserInfo());
+                  window.location.href = "/login";
+                }}
+              >
+                <Button
+                  variant="ghost"
+                  className={`w-full justify-start flex gap-2`}
+                >
+                  <span>Log out</span>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

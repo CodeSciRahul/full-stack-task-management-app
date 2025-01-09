@@ -1,3 +1,5 @@
+//create Menu Modal
+
 import {
     Dialog,
     DialogContent,
@@ -47,6 +49,7 @@ import {
        }
         setisOpen(false);
         reset();
+        window.location.reload();
       }catch (error: unknown) {
         if (error instanceof AxiosError) {
           toast.error(`${error.response?.data?.message}`);

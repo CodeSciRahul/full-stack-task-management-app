@@ -1,3 +1,5 @@
+//CartSLice to add menuItem on Cart 
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface CartItem {

@@ -1,3 +1,5 @@
+//AuthSclie to store and reterive user Information and token in local Storage
+
 import { createSlice,PayloadAction } from "@reduxjs/toolkit";
 
 interface loginSignupRes {

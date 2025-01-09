@@ -1,3 +1,4 @@
+//update Menu Modal
 import {
     Dialog,
     DialogContent,
@@ -11,7 +12,7 @@ import {
   import { useForm } from "react-hook-form";
   import { updateMenu } from "@/service/apiService";
   import toast from "react-hot-toast";
-  
+  import { AxiosError } from "axios";
   interface UpdateMenuDialogProps {
     isOpen: boolean;
     setisOpen: (arg: boolean) => void;
@@ -47,13 +48,17 @@ import {
         // Send the update request
        const response = await updateMenu(data, menuItem._id) as { data: { message: string } };
        if(response?.data) {
-        toast.success(response.data.message);
+        toast.success(`${response.data.message}`|| "Menu updated");
        }
         setisOpen(false); // Close the dialog on success
         reset(); // Reset the form
-        console.log("Menu updated successfully:", data);
-      } catch (error) {
-        console.error("Failed to update menu:", error);
+        window.location.reload();
+      } catch (error: unknown) {
+        if (error instanceof AxiosError) {
+          toast.error(`${error.response?.data?.message}`);
+        } else {
+          toast.error("An unexpected error occurred");
+        }
       }
     };
   
