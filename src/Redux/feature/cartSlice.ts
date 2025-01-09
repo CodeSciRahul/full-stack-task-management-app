@@ -50,22 +50,6 @@ export const cartSlice = createSlice({
         }
       }
     },
-    
-    updateQuantity: (state, action: PayloadAction<{ id: string; quantity: number }>) => {
-      const { id, quantity } = action.payload;
-      const existingItem = state.items.find((item) => item.id === id);
-
-      if (existingItem && quantity > 0) {
-        state.totalQuantity += quantity - existingItem.quantity;
-        state.totalPrice += (quantity - existingItem.quantity) * existingItem.price;
-        existingItem.quantity = quantity;
-      } else if (existingItem && quantity === 0) {
-        // Remove item if quantity is set to 0
-        state.items = state.items.filter((item) => item.id !== id);
-        state.totalQuantity -= existingItem.quantity;
-        state.totalPrice -= existingItem.quantity * existingItem.price;
-      }
-    },
     clearCart: (state) => {
       state.items = [];
       state.totalQuantity = 0;
@@ -74,6 +58,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

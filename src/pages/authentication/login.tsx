@@ -88,6 +88,7 @@ export function LoginForm({
                   id="username"
                   type="text"
                   placeholder="Enter your username"
+                  autoComplete="true"
                   {...register("username", { required: "Username is required" })}
                 />
                 {errors.username && (
@@ -99,8 +100,9 @@ export function LoginForm({
                 <Input
                   id="password"
                   type="password"
+                  autoComplete="true"
                   placeholder="Enter your password"
-                  {...register("password", { required: "Password is required" })}
+                  {...register("password", { required: "Password is required" }, )}
                 />
                 {errors.password && (
                   <p className="text-xs text-red-600">{errors.password.message}</p>

@@ -62,6 +62,10 @@ export function deleteMenu(id: string){
     return http.delete(`/menu/${id}`)
 }
 
+export function searchMenu(page: number, limit: number, query: string, category: string){
+  return http.get(`/menu/search?page=${page}&limit=${limit}&query=${query}&category=${category}`)
+}
+
 export function createOrder(data: createOrderReq){
   return http.post(`/order`,data);
 }
@@ -69,3 +73,4 @@ export function createOrder(data: createOrderReq){
 export function orderHistory(page: number, limit: number){
   return http.get(`/orders?page=${page}}&limit=${limit}`);
 }
+
